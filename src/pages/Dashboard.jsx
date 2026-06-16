@@ -1,4 +1,5 @@
 import StatCard from "../components/StatCard";
+import TaskCounter from "../components/TaskCounter";
 function DashboardPage() {
   const stats = [
      {
@@ -25,6 +26,7 @@ function DashboardPage() {
       <h1>داشبورد مدیریت پروژه</h1>
       <p>این متن یک تست برای صفحه اصلی می باشد</p>
       <div className="stats-grid">
+        <TaskCounter />
         {stats.map((stat) => {
          return(
            <StatCard
