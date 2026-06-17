@@ -26,7 +26,6 @@ function DashboardPage() {
       <h1>داشبورد مدیریت پروژه</h1>
       <p>این متن یک تست برای صفحه اصلی می باشد</p>
       <div className="stats-grid">
-        <TaskCounter />
         {stats.map((stat) => {
          return(
            <StatCard
@@ -38,6 +37,7 @@ function DashboardPage() {
          )
         })}
       </div>
+       <TaskCounter />
     </div>
   );
 }
