@@ -110,3 +110,30 @@
 .counter-actions button {
   flex: 1 1 140px;
 }
+.counter-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.counter-message {
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.counter-message--empty {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.counter-message--low {
+  background-color: #fef3c7;
+  border-color: #f59e0b;
+}
+
+.counter-message--high {
+  background-color: #fee2e2;
+  border-color: #ef4444;
+}
