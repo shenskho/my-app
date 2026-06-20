@@ -1,5 +1,7 @@
+
 import StatCard from "../components/StatCard";
 import TaskCounter from "../components/TaskCounter";
+import TaskForm from "../components/TaskForm";
 function DashboardPage() {
   const stats = [
      {
@@ -38,6 +40,7 @@ function DashboardPage() {
         })}
       </div>
        <TaskCounter />
+       <TaskForm />
     </div>
   );
 }
