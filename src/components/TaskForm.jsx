@@ -1,10 +1,15 @@
 import { useState } from "react";
+import TaskItem from "./TaskItem";
 
 function TaskForm() {
   const [taskTitle, setTaskTitle] = useState("");
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState("");
+
   const isSubmitDisabled = taskTitle.trim() === "";
+  const totalTasks = tasks.length;
+  const doneTasks = tasks.filter((task) => task.isDone).length;
+  const pendingTasks = totalTasks - doneTasks;
   const handleChange = (e) => {
     setTaskTitle(e.target.value);
 
@@ -23,11 +28,34 @@ function TaskForm() {
       return;
     }
 
-    setError("");
-    setTasks((prevTasks) => [...prevTasks, trimmedTitle]);
-    setTaskTitle("");
-  };
+    const newTask = {
+      id: Date.now(),
+      title: trimmedTitle,
+      isDone: false,
+    };
 
+    setError("");
+
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+
+    setTaskTitle("");
+    console.log(tasks);
+  };
+  const handleDelete = (taskId) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  };
+  const handleToggleTask = (taskId) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              isDone: !task.isDone,
+            }
+          : task,
+      ),
+    );
+  };
   return (
     <section className="task-form">
       <h2>Create Task</h2>
@@ -46,14 +74,20 @@ function TaskForm() {
           Add Task
         </button>
       </form>
-
+      {
+        <div className="task-summary">
+          <p>total tasks : {totalTasks}</p>
+          <p>done tasks : {doneTasks}</p>
+          <p>pending tasks : {pendingTasks}</p>
+        </div>
+      }
       {tasks.length > 0 && (
-        <ul className="task-list">
-          {tasks.map((task, index) => (
-            <li key={index}>{task}</li>
-          ))}
-        </ul>
-      )}
+  <ul className="task-list">
+    {tasks.map((task) => (
+    <TaskItem key={task.id} task={task} handleToggleTask={handleToggleTask} handleDelete={handleDelete} />
+    ))}
+  </ul>
+)}
     </section>
   );
 }
